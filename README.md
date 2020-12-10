@@ -1,4 +1,5 @@
 # Recipes
+# Use custom email to sign up, no confirmation required or use hello@test.com pwd: tester to try the app out.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 

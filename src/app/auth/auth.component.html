@@ -3,6 +3,9 @@
         <div class="alert alert-danger" *ngIf="error">
             <p>{{ error }}</p>
         </div>
+        <!-- <app-alert [message]="error" *ngIf="error" (closeAlert)="onHandleError()"></app-alert> -->
+        <!-- <ng-template appPlaceholder></ng-template> -->
+        
         <div *ngIf="isLoading" style="text-align: center;">
             <h3>Just a moment...</h3>
             <app-loading-spinner></app-loading-spinner>
@@ -12,6 +15,7 @@
             (ngSubmit)="onSubmit()"
             *ngIf="!isLoading"
         >
+            <h2 class="welcome">Please login <br />to start your Recipe journey.</h2>
             <div class="form-group">
                 <label for="email">E-Mail</label>
                 <input 

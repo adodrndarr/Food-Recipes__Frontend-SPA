@@ -8,7 +8,7 @@ import { DataStorageService } from '../shared/data-storage.service';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
-    styleUrls: []
+    styleUrls: ['./header.component.scss']
 })
 
 export class HeaderComponent implements OnInit, OnDestroy {
@@ -34,6 +34,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     onFetchData(): void {
         this.dataStorageService.fetchRecipes().subscribe();
+    }
+
+    onLogout(): void {
+        this.authService.logout();
     }
 
     ngOnDestroy(): void {

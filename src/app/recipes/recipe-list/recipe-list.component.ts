@@ -8,8 +8,7 @@ import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
-  templateUrl: './recipe-list.component.html',
-  styleUrls: ['./recipe-list.component.scss']
+  templateUrl: './recipe-list.component.html'
 })
 
 export class RecipeListComponent implements OnInit, OnDestroy {

@@ -1,0 +1,13 @@
+$brownish: #ffeecc;
+
+.header {
+    background-color: $brownish;
+    & div a { font-size: 25px; }
+    & div li { list-style: none; }
+}
+
+.navbar-default .navbar-nav > .active {
+    & > a,
+    & > a:focus,
+    & > a:hover { background-color: darken($color: $brownish, $amount: 40%) !important; }
+}

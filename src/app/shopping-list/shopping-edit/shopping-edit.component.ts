@@ -7,8 +7,7 @@ import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
-  templateUrl: './shopping-edit.component.html',
-  styleUrls: ['./shopping-edit.component.scss']
+  templateUrl: './shopping-edit.component.html'
 })
 
 export class ShoppingEditComponent implements OnInit, OnDestroy {

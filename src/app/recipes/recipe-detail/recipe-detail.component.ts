@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
@@ -7,21 +8,21 @@ import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-detail',
-  templateUrl: './recipe-detail.component.html',
-  styleUrls: ['./recipe-detail.component.scss']
+  templateUrl: './recipe-detail.component.html'
 })
 
 export class RecipeDetailComponent implements OnInit {
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private dataStorageService: DataStorageService) { }
 
 
   recipe: Recipe;
   id: number;
 
   ngOnInit(): void {
-    // const id = this.route.snapshot.params.id; // if we don't the component actively, while being on the same component
+    // const id = this.route.snapshot.params.id; // if we don't change the component actively, while being on the same component
     this.route.params // asynchronously subscribing to the observable,
                       // use it when we do change the component actively, while being on the same component
       .subscribe(
@@ -43,6 +44,8 @@ export class RecipeDetailComponent implements OnInit {
 
   onDeleteRecipe(): void {
     this.recipeService.deleteRecipe(this.id);
+    this.dataStorageService.storeRecipes();
+
     this.router.navigate(['/recipes'], { relativeTo: this.route });
   }
 

@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    // background-color: burlywood;
+    // background-image: url('https://th.bing.com/th/id/OIP.l8GI3FvF6L4mmxgnZOUMXwFhCw?w=333&h=174&c=7&o=5&pid=1.7');
+    background-image: url('./assets/imgs/brown-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.welcome { 
+    text-align: center;
+    color: darken($color: #ffeecc, $amount: 70%);
+    font-size: 60px;
+    font-weight: bold;
+    text-shadow: 3px 3px 3px #ffeecc;
+}
+

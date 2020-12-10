@@ -1,6 +1,7 @@
 # Recipes
 # Use custom email to sign up, no confirmation required or use hello@test.com pwd: tester to try the app out.
 
+Link in the About me section or --> https://recipe-bok-44b1d.web.app/
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
 ## Development server

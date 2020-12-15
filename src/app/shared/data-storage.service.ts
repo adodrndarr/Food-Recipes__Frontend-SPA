@@ -3,9 +3,12 @@ import { Injectable } from '@angular/core';
 
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
-import { map, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Ingredient } from './ingredient.model';
 
+
+const INITIAL_RECIPE = 'Delicious Example Pizza';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
@@ -17,7 +20,11 @@ export class DataStorageService {
         const recipes = this.recipeService.getRecipes();
         this.http.put(this.recipesUrl, recipes)
             .subscribe((response) => {
-                console.log(response);
+                console.log(`Stored the following recipe/s: `);
+                console.log(response); // ------ DEBUG
+
+                const currentRecipes = this.recipeService.getRecipes();
+                this.updateRecipes(currentRecipes);
             });
     }
 
@@ -27,6 +34,10 @@ export class DataStorageService {
             .get<Recipe[]>(this.recipesUrl)
             .pipe(
                 map(recipes => {
+                    if (!recipes) {
+                        recipes = this.initializeRecipes();
+                    }
+
                     return recipes.map(recipe => {
                         return {
                             ...recipe,
@@ -38,5 +49,32 @@ export class DataStorageService {
                     this.recipeService.setRecipe(recipes);
                 })
             );
+    }
+
+    initializeRecipes(): Recipe[] {
+        return [
+            new Recipe(
+                INITIAL_RECIPE,
+                'Please add your own recipe this Pizza is mine :P',
+                'https://th.bing.com/th/id/OIP.qmbkst9oa8eD1-eocWFMXwHaEz?w=284&h=184&c=7&o=5&pid=1.7',
+                [
+                    new Ingredient('Please add your own recipe to remove this example', 1)
+                ])
+        ];
+    }
+
+    updateRecipes(recipes: Recipe[]): void {
+        if (recipes.length > 1) {
+            if (recipes[0].name === INITIAL_RECIPE) {
+                recipes.splice(0, 1);
+
+                this.recipeService.setRecipe(recipes);
+                this.storeRecipes();
+            }
+        }
+
+        if (recipes.length === 0) {
+            this.fetchRecipes().subscribe();
+        }
     }
 }

@@ -51,7 +51,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
         for (const ingredient of recipe.ingredients) {
           recipeIngredients.push(new FormGroup(
             this.createControls(['name', 'amount'], [ingredient.name, ingredient.amount])
-            ));
+          ));
         }
 
         this.recipeFormGroups = recipeIngredients.value;
@@ -84,9 +84,9 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
       if (isNaN(+propName) === false) { // if it's a number
         objWithControls[propName] = new FormControl(values[i], [
-            Validators.required,
-            Validators.pattern(/^[1-9]+[0-9]*$/)
-          ]);
+          Validators.required,
+          Validators.pattern(/^[1-9]+[0-9]*$/)
+        ]);
       }
     }
 

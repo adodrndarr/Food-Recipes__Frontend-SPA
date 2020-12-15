@@ -4,13 +4,17 @@
     </div>
 </div>
 <hr />
-<div class="row">
-    <div class="col-xs-12">
-        <app-recipe-item         
-            *ngFor="let recipeEl of recipes; let i = index"   
-            [recipe]="recipeEl"
-            [index]="i"
-        >
-        </app-recipe-item>        
-    </div>
+
+<div *ngIf="recipes">
+    <div class="row">
+        <div class="col-xs-12">
+            <app-recipe-item         
+                *ngFor="let recipeEl of recipes; let i = index"   
+                [recipe]="recipeEl"
+                [index]="i"
+            >
+            </app-recipe-item>        
+        </div>
+    </div>    
 </div>
+<app-loading-spinner *ngIf="recipes.length === 0"></app-loading-spinner>

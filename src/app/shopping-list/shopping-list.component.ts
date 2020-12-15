@@ -23,7 +23,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       .subscribe((ingredients: Ingredient[]) => {
         this.ingredients = ingredients;
       });
-    
+
     this.loggingService.printLog('Hello from ShoppingList Component ngOnInit()!');
   }
 

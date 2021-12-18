@@ -3,11 +3,13 @@
 
 Link in the About section or --> https://recipe-bok-44b1d.web.app/
 
+
+<br /> <br />
+# A small Angular application for organizing and browsing through great recipes.
+
 <br /> <br />
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
-
-A small Angular application for organizing and browsing through great recipes.
 
 ## Development server
 

@@ -1,7 +1,8 @@
 # Recipes
-# Use custom email to sign up, no confirmation required or use hello@test.com pwd: tester to try the app out.
 # A small Angular application for organizing and browsing through great recipes.
+<br />
 
+## Use custom email to sign up, no confirmation required or use hello@test.com pwd: tester to try the app out.
 Link in the About section or --> https://recipe-bok-44b1d.web.app/
 
 <br /> <br />

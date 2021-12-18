@@ -3,7 +3,6 @@
 
 Link in the About section or --> https://recipe-bok-44b1d.web.app/
 
-<br />
 # A small Angular application for organizing and browsing through great recipes.
 
 <br /> <br />

@@ -5,18 +5,8 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { User, UserDTO } from './user.model';
-
-
-export interface AuthResponseData {
-    kind: string;
-    idToken: string;
-    email: string;
-    refreshToken: string;
-    expiresIn: string;
-    localId: string;
-    registered?: boolean;
-}
+import { AuthResponseData } from '../models/auth-response-data.model';
+import { User, UserDTO } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -26,7 +16,6 @@ export class AuthService {
     user = new BehaviorSubject<User>(null);
     private tokenExpirationTimer: any;
 
-    // apiKey = 'AIzaSyA_Aa8P3roWV_yOP4coP7y0cpsBN7k1Yhc';
     apiKey = environment.firebaseAPIKey;
     signUpUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.apiKey}`;
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.apiKey}`;
@@ -47,9 +36,9 @@ export class AuthService {
             _token: string,
             _tokenExpirationDate: string
         } = JSON.parse(localStorage.getItem('userData'));
-        if (!userData) {
+
+        if (!userData)
             return;
-        }
 
         const tokenExpirationDate = new Date(userData._tokenExpirationDate);
         const loadedUser = new User(
@@ -59,12 +48,13 @@ export class AuthService {
             tokenExpirationDate
         );
 
-        if (loadedUser.token) {
-            this.user.next(loadedUser);
+        if (!loadedUser.token)
+            return;
 
-            const expirationDuration = tokenExpirationDate.getTime() - new Date().getTime();
-            this.autoLogout(expirationDuration);
-        }
+        this.user.next(loadedUser);
+
+        const expirationDuration = tokenExpirationDate.getTime() - new Date().getTime();
+        this.autoLogout(expirationDuration);
     }
 
     login(email: string, password: string): Observable<AuthResponseData> {
@@ -86,11 +76,10 @@ export class AuthService {
         this.user.next(null);
         localStorage.removeItem('userData');
 
-        if (this.tokenExpirationTimer) {
+        if (this.tokenExpirationTimer)
             clearTimeout(this.tokenExpirationTimer);
-        }
-        this.tokenExpirationTimer = null;
 
+        this.tokenExpirationTimer = null;
         this.router.navigate(['/auth']);
     }
 

@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
-import { map, take, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Ingredient } from './ingredient.model';
+import { Ingredient } from '../models/ingredient.model';
 
 
 const INITIAL_RECIPE = 'Delicious Example Pizza';
@@ -16,10 +16,12 @@ export class DataStorageService {
 
 
     recipesUrl = 'https://recipe-bok-44b1d-default-rtdb.firebaseio.com/recipes.json';
+
     storeRecipes(): void {
         const recipes = this.recipeService.getRecipes();
         this.http.put(this.recipesUrl, recipes)
             .subscribe((response) => {
+
                 console.log(`Stored the following recipe/s: `);
                 console.log(response); // ------ DEBUG
 
@@ -29,14 +31,12 @@ export class DataStorageService {
     }
 
     fetchRecipes(): Observable<any> {
-        // this.authService.user.subscribe().unsubscribe(); -- instead of this
         return this.http
             .get<Recipe[]>(this.recipesUrl)
             .pipe(
                 map(recipes => {
-                    if (!recipes) {
+                    if (!recipes)
                         recipes = this.initializeRecipes();
-                    }
 
                     return recipes.map(recipe => {
                         return {
@@ -45,9 +45,7 @@ export class DataStorageService {
                         };
                     });
                 }),
-                tap((recipes) => {
-                    this.recipeService.setRecipe(recipes);
-                })
+                tap((recipes) => this.recipeService.setRecipe(recipes))
             );
     }
 
@@ -64,17 +62,16 @@ export class DataStorageService {
     }
 
     updateRecipes(recipes: Recipe[]): void {
-        if (recipes.length > 1) {
-            if (recipes[0].name === INITIAL_RECIPE) {
-                recipes.splice(0, 1);
+        const removeInitialRecipe = (recipes.length > 1) && (recipes[0]?.name === INITIAL_RECIPE);
 
-                this.recipeService.setRecipe(recipes);
-                this.storeRecipes();
-            }
+        if (removeInitialRecipe) {
+            recipes.splice(0, 1);
+
+            this.recipeService.setRecipe(recipes);
+            this.storeRecipes();
         }
 
-        if (recipes.length === 0) {
+        if (recipes.length === 0)
             this.fetchRecipes().subscribe();
-        }
     }
 }

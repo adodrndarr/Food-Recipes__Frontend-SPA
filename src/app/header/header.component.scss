@@ -9,5 +9,5 @@ $brownish: #ffeecc;
 .navbar-default .navbar-nav > .active {
     & > a,
     & > a:focus,
-    & > a:hover { background-color: darken($color: $brownish, $amount: 40%) !important; }
+    & > a:hover { background-color: darken($color: $brownish, $amount: 40%); }
 }

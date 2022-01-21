@@ -1,9 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-
 import { DataStorageService } from '../shared/data-storage.service';
-
 
 @Component({
     selector: 'app-header',
@@ -12,20 +10,20 @@ import { DataStorageService } from '../shared/data-storage.service';
 })
 
 export class HeaderComponent implements OnInit, OnDestroy {
-    constructor(private dataStorageService: DataStorageService,
-                private authService: AuthService) { }
+    constructor(
+        private dataStorageService: DataStorageService,
+        private authService: AuthService
+    ) { }
 
 
     userSub: Subscription;
     isAuthenticated = false;
 
     ngOnInit(): void {
-        this.userSub = this.authService.user.subscribe(
-            (user) => {
-                // this.isAuthenticated = !user ? false : true;
-                this.isAuthenticated = !!user; // same as the above
-            }
-        );
+        this.userSub = this.authService.user.subscribe((user) => this.isAuthenticated = !!user);
+
+        // this.isAuthenticated = !user ? false : true;
+        // this.isAuthenticated = !!user; // same as the above
     }
 
     onSaveData(): void {

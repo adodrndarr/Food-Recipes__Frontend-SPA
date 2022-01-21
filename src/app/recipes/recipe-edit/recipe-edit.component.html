@@ -6,8 +6,9 @@
                     <button 
                         type="submit" 
                         class="btn btn-success"
-                        [disabled]="!recipeForm.valid"
+                        [disabled]="!recipeForm?.valid"
                     >Save</button>
+
                     <button 
                         type="button" 
                         class="btn btn-danger"
@@ -15,6 +16,7 @@
                     >Cancel</button>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
@@ -28,6 +30,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
@@ -42,11 +45,13 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-xs-12">
                     <img [src]="imagePath.value" class="img-responsive">
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
@@ -61,6 +66,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-xs-12" formArrayName="ingredients">
                     <div 
@@ -77,7 +83,8 @@
                                 class="form-control"
                                 formControlName="name"
                             >                
-                        </div>                        
+                        </div>
+
                         <div class="col-xs-2">
                             <label for="amount">Amount</label>
                             <input 
@@ -86,7 +93,8 @@
                                 class="form-control"
                                 formControlName="amount"
                             >                
-                        </div>                        
+                        </div>
+
                         <div class="col-xs-2">
                             <button 
                                 type="button"
@@ -95,6 +103,7 @@
                             >X</button>
                         </div>
                     </div>
+                    
                     <hr />
                     <div class="row">
                         <div class="col-xs-12">

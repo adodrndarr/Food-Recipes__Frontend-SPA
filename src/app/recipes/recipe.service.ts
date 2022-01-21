@@ -1,37 +1,18 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { Ingredient } from '../shared/ingredient.model';
+import { Ingredient } from '../models/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from './recipe.model';
 
 
 @Injectable()
 export class RecipeService {
-    constructor(private shoppingListService: ShoppingListService) {}
+    constructor(private shoppingListService: ShoppingListService) { }
 
 
     recipesChanged = new Subject<Recipe[]>();
     formIngredientsChanged = new Subject<FormGroup[]>();
-
-    // private recipes: Recipe[] = [
-    //     new Recipe(
-    //         'Vegetarian Meal',
-    //         'What else you need to say?',
-    //         'https://i.ytimg.com/vi/nYhf16btqck/maxresdefault.jpg',
-    //         [
-    //             new Ingredient('Vegetarian Meal', 2),
-    //             new Ingredient('French Fries', 20)
-    //         ]),
-    //     new Recipe(
-    //         'Cookie Tasty!!',
-    //         'Fantastic enjoy!',
-    //         'https://i.ytimg.com/vi/nYhf16btqck/maxresdefault.jpg',
-    //         [
-    //             new Ingredient('Buns', 2),
-    //             new Ingredient('Vegy Meal', 4)
-    //         ])
-    // ];
 
     private recipes: Recipe[] = [];
 

@@ -12,10 +12,12 @@ import { RecipeService } from '../recipe.service';
 })
 
 export class RecipeListComponent implements OnInit, OnDestroy {
-  constructor(private recipeService: RecipeService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private dataStorageService: DataStorageService) { }
+  constructor(
+    private recipeService: RecipeService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private dataStorageService: DataStorageService
+  ) { }
 
 
   recipes: Recipe[];
@@ -23,13 +25,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.recipes = this.recipeService.getRecipes();
-    this.recipesSub = this.recipeService.recipesChanged
-      .subscribe(
-        (recipes: Recipe[]) => {
-          this.recipes = recipes;
-        }
-      );
-
+    this.recipesSub = this.recipeService.recipesChanged.subscribe((recipes: Recipe[]) => this.recipes = recipes);
     this.dataStorageService.fetchRecipes();
   }
 

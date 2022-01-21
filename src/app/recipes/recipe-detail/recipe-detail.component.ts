@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
-
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 
@@ -13,10 +11,12 @@ import { RecipeService } from '../recipe.service';
 })
 
 export class RecipeDetailComponent implements OnInit {
-  constructor(private recipeService: RecipeService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private dataStorageService: DataStorageService) { }
+  constructor(
+    private recipeService: RecipeService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private dataStorageService: DataStorageService
+  ) { }
 
 
   recipe: Recipe;
@@ -26,15 +26,13 @@ export class RecipeDetailComponent implements OnInit {
     // const id = this.route.snapshot.params.id; // if we don't change the component actively, while being on the same component
     this.route.params // asynchronously subscribing to the observable,
       // use it when we do change the component actively, while being on the same component
-      .subscribe(
-        (params: Params) => {
-          this.id = +params.id;
+      .subscribe((params: Params) => {
+        this.id = +params.id;
 
-          this.recipe = this.recipeService.getRecipe(this.id);
-          this.recipeService.recipesChanged
-            .subscribe(() => this.recipe = this.recipeService.getRecipe(this.id));
-        }
-      );
+        this.recipe = this.recipeService.getRecipe(this.id);
+        this.recipeService.recipesChanged
+          .subscribe(() => this.recipe = this.recipeService.getRecipe(this.id));
+      });
   }
 
   onAddToShoppingList(): void {

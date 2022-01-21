@@ -3,13 +3,12 @@
         <div class="alert alert-danger" *ngIf="error">
             <p>{{ error }}</p>
         </div>
-        <!-- <app-alert [message]="error" *ngIf="error" (closeAlert)="onHandleError()"></app-alert> -->
-        <!-- <ng-template appPlaceholder></ng-template> -->
         
         <div *ngIf="isLoading" style="text-align: center;">
             <h3>Just a moment...</h3>
             <app-loading-spinner></app-loading-spinner>
         </div>
+
         <form 
             [formGroup]="authForm" 
             (ngSubmit)="onSubmit()"
@@ -27,6 +26,7 @@
                     formControlName="email"
                 >
             </div>
+
             <div class="form-group">
                 <label for="password">Password</label>
                 <input 
@@ -37,18 +37,21 @@
                     formControlName="password"                
                 >
             </div>
+
             <div>
                 <button 
                     class="btn btn-primary"
                     type="submit"
                     [disabled]="!authForm.valid"
-                >{{ isLoginMode ? 'Login' : 'Sign up' }}</button> or                   
+                >{{ isLoginMode ? 'Login' : 'Sign up' }}</button> or     
+
                 <button 
                     class="btn btn-primary"
                     type="button"
                     (click)="onSwitchMode()"
                 >Switch to {{ isLoginMode ? 'Sign up' : 'Login' }}</button>        
             </div>
+            
         </form>
     </div>
 </div>
